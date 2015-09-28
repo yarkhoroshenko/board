@@ -9,22 +9,27 @@ function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
+function emptyObject(obj) {
+  for (var i in obj) {
+    return false;
+  }
+  return true;
+}
+
 exports.get = function(req, res, next) {
-  console.log('get');
     var data = qstr.parse(url.parse(req.url).query);
-    //if(!emptyObject(data)) {
+    if(!emptyObject(data)) {
     User.search(data, function (err, user) {
       if (err) return next(err);
       res.status(200).send(user);
     });
-    //} else {
-    //  next(new HttpError(404))
-    //}
+    } else {
+      next(new HttpError(404))
+    }
 };
 
 
 exports.getId = function(req, res, next) {
-  console.log('getId');
     var id = req.params.id;
 
     if (isNumeric(id)) {
@@ -53,12 +58,3 @@ exports.getId = function(req, res, next) {
       next(new HttpError(404));
     }
 };
-
-
-//function emptyObject(obj) {
-//  for (var i in obj) {
-//    //console.log(i);
-//    return false;
-//  }
-//  return true;
-//}

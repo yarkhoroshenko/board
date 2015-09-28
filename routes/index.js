@@ -34,7 +34,6 @@ router.post('/api/item/:id/image', require('./image').post);
 router.delete('/api/item/:id/image', require('./image').delete);
 
 router.all('*', function (req, res, next) {
-  console.log('*');
   next (new HttpError(404));
 });
 

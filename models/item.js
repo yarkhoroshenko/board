@@ -169,7 +169,6 @@ schema.statics.createItemImage = function(item, tmp_path, target_path, callback)
         });
       } else {
         fs.unlink(tmp_path, function (err) {
-          console.log(err);
           if (err) return callback(err);
           callback(new HttpError(422, [{"field": "file", "message": "File already exist"}]));
         });

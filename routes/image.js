@@ -92,7 +92,6 @@ exports.delete = function(req, res, next) {
         function(callback) {
           User.checkAuth(token, function (err, user) {
             if (err) return callback(err);
-            console.log(arguments);
             callback(null, user);
           });
         },

@@ -150,6 +150,13 @@ exports.put = function(req, res, next) {
   }
 };
 
+function emptyObject(obj) {
+  for (var i in obj) {
+    return false;
+  }
+  return true;
+}
+
 exports.get = function(req, res, next) {
   var query = qstr.parse(url.parse(req.url).query);
   async.waterfall([
